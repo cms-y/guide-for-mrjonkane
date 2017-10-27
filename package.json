@@ -27,7 +27,6 @@
     "deploy": "npm run build && gh-pages -d build"
   },
   "devDependencies": {
-    "node-sass-chokidar": "4.3.0",
     "gh-pages": "^1.0.0",
     "npm-run-all": "^4.1.1"
   }

@@ -7,6 +7,19 @@ class About extends Component {
   constructor(props) {
     super(props);
   }
+  setScrollStatus() {
+    if (document.getElementById('about')) {
+      var header = document.getElementsByTagName('header')[0];
+      var main = document.getElementById('about');
+      var footer = document.getElementsByTagName('footer')[0];
+      var b = window.innerHeight;
+      var h = header.scrollHeight;
+      var m = main.scrollHeight;
+      var f = footer.scrollHeight;
+      var t = b - (h + m + f);
+      footer.dataset.scroll = (t < 12) ? true : false;
+    }
+  }
   hideScreen() {
     var header = document.getElementsByTagName('header')[0];
     var main = document.getElementsByTagName('main')[0];
@@ -42,6 +55,7 @@ class About extends Component {
         const square = React.createElement(ContentsSquare, {data : val.square});
         ReactDOM.render(square, squareTag);
         self.setFooterOpacity(1);
+        self.setScrollStatus();
       }
     });
   }
@@ -49,6 +63,10 @@ class About extends Component {
     this.hideScreen();
     this.setFooterOpacity(0);
     this.initAbout();
+    var self = this;
+    window.addEventListener('resize', function (event) {
+      self.setScrollStatus();
+    });
   }
   render() {
     return ( <main id="about"></main> );
